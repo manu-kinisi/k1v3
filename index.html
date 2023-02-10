@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Kinisi K1 Demo</title>
+<title>Kinisi K1</title>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro/dist/iro.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
@@ -17,7 +17,7 @@
 <script src="./libs/charthelpers.js"></script>
 <script src="./libs/sensordata.js"></script>
 <script src="./libs/knee-image-functions.js"></script>
-
+<script> bw.DOMInsertElement("head", bw.htmlFavicon("@","black"))</script></script>
 <link href="./libs/c3.min.css" />
 <style>
 * {font-family: Arial, Helvetica, sans-serif }
@@ -323,8 +323,11 @@ float: right;
   });
  
  //Flexion Angle
+setTimeout( ()=> {
+  renderKneeBonesAngle("#bonesFront",0,"front","right")
+  renderKneeBonesAngle("#bonesLateral",0,"lateral","right")
+},1000);
 
- 
   var angleGauge = c3.generate({
     data: {
         columns: [    ['data', 0]    ],
