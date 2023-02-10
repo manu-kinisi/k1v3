@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://cdn.jsdelivr.net/npm/bitwrench@1.2.16/bitwrench.min.js" integrity="sha256-I9wVeuACrL3WRMZsEByRoz8OO7/lmCIQ6YFvSs3R7fM=" crossorigin="anonymous"></script>
+<script src="../libs/bitwrench.min.js"></script>
 <style>
 img {
 	border-radius: 0.75rem;
 }
 
 .slider {
-
+padding: 2rem;
 }
 .mirror {
   -webkit-transform: scaleX(-1);
@@ -47,27 +47,29 @@ button : hover {
 <script>
 let renderData;
 var i=0,j=0,pause=false;
-async function getImages() {
+async function getKneeImages() {
     const response = await fetch("./SkeletonOutput/rendFileNames.json");
     const json = await response.json();
     renderData = json;
     bw.DOM("#files",bw.htmlJSON(renderData));
     setInterval(()=> {
     		if (!pause) {
-    			renderImages(j);
+    			renderKneeBones(j);
     		}
 	    	i = (i+1) % (2*renderData.lateralFiles.length -1);
 	    	j = (i< renderData.lateralFiles.length) ? i : (2*renderData.lateralFiles.length) - i -1;
 	    	
 	    }, 100);
 }
-function renderImages(j) {
+
+getKneeImages();
+
+function renderKneeBones(j) {
 	bw.DOM("#lateral_left")[0].src  = "./"+renderData.lateralFiles[j % renderData.lateralFiles.length]; 
 	bw.DOM("#lateral_right")[0].src = "./"+renderData.lateralFiles[j % renderData.lateralFiles.length]; 
 	bw.DOM("#front_left")[0].src    = "./"+renderData.frontFiles  [j % renderData.frontFiles.length]; 
 	bw.DOM("#front_right")[0].src   = "./"+renderData.frontFiles  [j % renderData.frontFiles.length]; 	
 }
-getImages();
 function pauseSteps(){ pause = !pause; bw.DOM("#pause")[0].style["background-color"] = pause ? "grey" : "lightblue"  }
 const value = document.querySelector("#imageIndex");
 value.addEventListener("input",(e)=>{bw.DOM("#selection",e.target.value), renderImages(e.target.value)})
