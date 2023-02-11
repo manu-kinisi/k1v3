@@ -65,6 +65,7 @@ async function getKneeImages() {
 getKneeImages();
 
 function renderKneeBones(j) {
+	const path= "./SkeletonOutput/"
 	bw.DOM("#lateral_left")[0].src  = "./"+renderData.lateralFiles[j % renderData.lateralFiles.length]; 
 	bw.DOM("#lateral_right")[0].src = "./"+renderData.lateralFiles[j % renderData.lateralFiles.length]; 
 	bw.DOM("#front_left")[0].src    = "./"+renderData.frontFiles  [j % renderData.frontFiles.length]; 
@@ -72,7 +73,7 @@ function renderKneeBones(j) {
 }
 function pauseSteps(){ pause = !pause; bw.DOM("#pause")[0].style["background-color"] = pause ? "grey" : "lightblue"  }
 const value = document.querySelector("#imageIndex");
-value.addEventListener("input",(e)=>{bw.DOM("#selection",e.target.value), renderImages(e.target.value)})
+value.addEventListener("input",(e)=>{bw.DOM("#selection",e.target.value), renderKneeBones(e.target.value)})
 
 
 </script>	
